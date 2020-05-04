@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="290205995528-o268sq4cttuds0f44jnre5sb6rudfsb5.apps.googleusercontent.com">
+    <title>Spring-Vue</title>
+    <link rel="stylesheet" href="js/bootstrap-4/bootstrap.min.css">
+    <link rel="stylesheet" href="js/leaflet/leaflet.css">
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="https://apis.google.com/js/api:client.js"></script>
+<!--    <script src="https://apis.google.com/js/platform.js" async defer></script>-->
+    <script src="js/vue/vue.js"></script>
+    <script src="js/leaflet/leaflet.js"></script>
+    <script src="js/leaflet/vue2-leaflet.min.js"></script>
+    <script src="js/vue-google-signin-button/vue-google-signin-button.min.js"></script>
+    <script src="js/vue/vue-router.js"></script>
+    <script src="js/axios/axios.js"></script>
+    <script src="js/bootstrap-4/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/bootstrap-4/popper.min.js"></script>
+    <script src="js/bootstrap-4/bootstrap.min.js"></script>
+
+    <!--    <script src="js/vue/app.js"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/moment"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>-->
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>-->
+
+<style type="text/css" rel="stylesheet">
+    .router-link-active {
+        color: red !important;
+    }
+</style>
+</head>
+<body>
+
+
+<div id="app">
+    <button id="signinButton" v-on:click="onSignIn();">Sign in with Google</button>
+    {{message}}
+    <button v-on:click="signOut();">Sign out</button>
+</div>
+
+<script type="application/javascript">
+    const app = new Vue({
+        data: {
+            message: 'Hello Vue!'
+        },
+        mounted() {
+            this.$nextTick(() => {
+                console.log(gapi);
+                gapi.load('auth2', function() {
+                    auth2 = gapi.auth2.init({
+                        client_id: '290205995528-o268sq4cttuds0f44jnre5sb6rudfsb5.apps.googleusercontent.com',
+                        // Scopes to request in addition to 'profile' and 'email'
+                        //scope: 'additional_scope'
+                    });
+                });
+                console.log(gapi);
+            });
+
+            // gapi.signin2.render('my-signin2', {
+            //     'scope': 'profile email',
+            //     'width': 240,
+            //     'height': 50,
+            //     'longtitle': true,
+            //     'theme': 'dark',
+            //     'onsuccess': onSuccess,
+            //     'onfailure': onFailure
+            // });
+        },
+        methods: {
+            onSignIn: function (googleUser) {
+                auth2.grantOfflineAccess().then(this.signInCallback);
+                // var profile = googleUser.getBasicProfile();
+                // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                // console.log('Name: ' + profile.getName());
+                // console.log('Image URL: ' + profile.getImageUrl());
+                // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            },
+            signInCallback: function(authResult) {
+                console.log(authResult);
+            },
+            signOut: function () {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+        }
+    }).$mount('#app');
+    console.log(app);
+</script>
+</body>
+</html>

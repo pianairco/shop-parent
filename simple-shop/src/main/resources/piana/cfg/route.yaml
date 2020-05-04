@@ -1,0 +1,13 @@
+route:
+  /: $redirect-to(/root)
+  /root:
+    component: tsidebar
+    children:
+      home:
+        component: home
+        children:
+          book: book
+      login: login
+      products:
+        book: book
+        box: shoppingItem
