@@ -7,6 +7,9 @@
             <template v-if="control.type == cType">
                 <control-text :label="control.label" :name="control.name"></control-text>
             </template>
+            <template v-if="control.type == uType">
+                <file-upload :action="$bean$" :activity="x"></file-upload>
+            </template>
         </div>
     </form>
 </div>
@@ -18,6 +21,7 @@
         data: function () {
             return {
                 cType: 'text',
+                uType: 'image-uploader',
                 message: 'Hello To Box',
                 render: false,
                 controls: {
@@ -66,7 +70,9 @@
                             new ControlModel()
                                     .setType("text").setLabel("نام").setName("fname"),
                             new ControlModel()
-                                    .setType("text").setLabel("فامیلی").setName("lname")
+                                    .setType("text").setLabel("فامیلی").setName("lname"),
+                            new ControlModel()
+                                    .setType("image-uploader").setLabel("فامیلی").setName("profileImage")
                     ));
                 };
             }

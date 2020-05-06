@@ -1,2 +1,5 @@
 route:
-  /: fileUpload
+  /: $redirect-to(/root)
+  /root:
+    component: fileUpload
+

@@ -3,7 +3,7 @@
 <html-template>
     <div>
         <label>File
-            <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+            <input type="file" id="file" ref="file" v-on:change="handleFileUpload"/>
         </label>
         <button v-on:click="submitFile()">Submit</button>
     </div>
@@ -13,24 +13,31 @@
     var $app$ = Vue.component('$app$', {
         template: '$template$',
         props: {
+            action: String,
+            activity: String
         },
-        data: function () {
+        data() {
             return {
                 message: '',
                 file: ''
             }
         },
         methods: {
-            handleFileUpload: function() {
+            handleFileUpload: function(event) {
+                console.log(event.target.files[0]);
+                console.log(this.$refs.file.files[0]);
                 this.file = this.$refs.file.files[0];
             },
             submitFile: function() {
+                console.log(this.file);
                 let formData = new FormData();
                 formData.append('file', this.file);
-                axios.post('/action/file', formData, {
+                let actn = this.action ? this.action : '$bean$';
+                let actv = this.activity ? this.activity : 'x';
+                axios.post('/action/servlet', formData, {
                     headers: {
-                        "action": "FileUploadGateway",
-                        "activity": "getFile",
+                        "action": actn,
+                        "activity": actv,
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(function(){
@@ -45,24 +52,16 @@
 
 <bean>
     <import>
-        <%@ page import="org.springframework.http.RequestEntity" %>
-        <%@ page import="org.springframework.http.ResponseEntity" %>
-        <%@ page import="java.util.function.Function" %>
-        <%@ page import="java.util.Map" %>
         <%@ page import="ir.piana.dev.springvue.core.action.Action" %>
-        <%@ page import="ir.piana.business.fileupload.data.model.ItemModel" %>
+        <%@ page import="org.springframework.http.ResponseEntity" %>
+        <%@ page import="javax.servlet.http.HttpServletRequest" %>
+        <%@ page import="java.util.function.Function" %>
     </import>
     <action>
         <%
             class $VUE$ extends Action {
-
-                public Function<RequestEntity, ResponseEntity> x = (r) -> {
-                    Map body = (Map) r.getBody();
-                    return ResponseEntity.ok(new ItemModel()
-                            .setId(1).setCode("1").setTitle("خرم بهبهان")
-                            .setImageSrc("/images/logo.png")
-                            .setPrice(10000).setDiscountPercent(40).setPriceUnit("تومان")
-                            .setMeasurement(1).setMeasurementUnit("کیلورم"));
+                public Function<HttpServletRequest, ResponseEntity> x = (r) -> {
+                    return ResponseEntity.status(404).body("action and activity not provided!");
                 };
             }
         %>
