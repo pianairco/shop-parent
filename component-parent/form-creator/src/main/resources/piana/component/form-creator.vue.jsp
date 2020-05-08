@@ -8,7 +8,7 @@
                 <control-text :label="control.label" :name="control.name"></control-text>
             </template>
             <template v-if="control.type == uType">
-                <file-upload :action="$bean$" :activity="x"></file-upload>
+                <file-upload :action="control.action" :activity="control.activity"></file-upload>
             </template>
         </div>
     </form>
@@ -30,7 +30,9 @@
                         return [{
                             type: String,
                             label: String,
-                            name: String
+                            name: String,
+                            action: String,
+                            activity: String
                         }]
                     }
                 }
@@ -56,6 +58,7 @@
         <%@ page import="org.springframework.http.ResponseEntity" %>
         <%@ page import="java.util.function.Function" %>
         <%@ page import="java.util.Map" %>
+        <%@ page import="javax.servlet.http.HttpServletRequest" %>
         <%@ page import="ir.piana.dev.springvue.core.action.Action" %>
         <%@ page import="ir.piana.business.formcreator.data.model.ControlModel" %>
         <%@ page import="java.util.Arrays" %>
@@ -72,8 +75,13 @@
                             new ControlModel()
                                     .setType("text").setLabel("فامیلی").setName("lname"),
                             new ControlModel()
-                                    .setType("image-uploader").setLabel("فامیلی").setName("profileImage")
+                                    .setType("image-uploader").setLabel("تصویر").setName("profileImage")
+                                    .setAction("$bean$").setActivity("y")
                     ));
+                };
+
+                public Function<HttpServletRequest, ResponseEntity> y = (r) -> {
+                    return ResponseEntity.ok("success");
                 };
             }
         %>

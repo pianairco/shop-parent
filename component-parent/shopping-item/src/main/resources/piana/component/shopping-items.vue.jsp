@@ -43,7 +43,7 @@
         },
         methods: {
             x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "shoppingItems"}})
                     .then((response) => { this.items = response.data; this.render = true; })
             .catch((err) => { this.message = err; });
             }
@@ -68,7 +68,7 @@
         <%
             class $VUE$ extends Action {
 
-                public Function<RequestEntity, ResponseEntity> x = (r) -> {
+                public Function<RequestEntity, ResponseEntity> shoppingItems = (r) -> {
                     Map body = (Map) r.getBody();
                     return ResponseEntity.ok(Arrays.asList(
                             new ItemModel()

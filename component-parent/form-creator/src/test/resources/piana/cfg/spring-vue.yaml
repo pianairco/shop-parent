@@ -3,4 +3,4 @@ app:
     bean-base-name: springVue
     bean-package: ir.piana.business.componenttester.action
   vue:
-    load-from: resource
+    load-from: resource, interface

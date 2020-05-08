@@ -6,12 +6,13 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ShoppingItemLoadable implements VueComponentLoadable {
+public class ShoppingItemsLoadable implements VueComponentLoadable {
     @Override
     public String getComponentString() {
+
         try {
-            InputStream inputStream = ShoppingItemLoadable.class.getResourceAsStream(
-                    "/piana/component/shopping-item.vue.jsp");
+            InputStream inputStream = ShoppingItemsLoadable.class.getResourceAsStream(
+                    "/piana/component/shopping-items.vue.jsp");
             String s = IOUtils.toString(inputStream, "UTF-8");
             return s;
         } catch (IOException e) {

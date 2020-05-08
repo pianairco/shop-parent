@@ -1,2 +1,3 @@
 route:
-  /: formCreator
+  /: $redirect-to(/root)
+  /root: formCreator

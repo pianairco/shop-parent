@@ -20,7 +20,7 @@ app:
     debug: true
 spring-vue:
   file-upload:
-    directory: c:/test
+    directory: c:/
     threshold-size: 3
     max-file-size: 40
     max-request-size: 50

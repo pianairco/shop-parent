@@ -10,4 +10,4 @@ route:
       login: login
       products:
         book: book
-        box: shoppingItem
+        box: shoppingItems
