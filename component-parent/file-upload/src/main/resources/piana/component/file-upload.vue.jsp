@@ -5,7 +5,7 @@
         <label>File
             <input type="file" id="file" ref="file" v-on:change="handleFileUpload"/>
         </label>
-        <button v-on:click="submitFile()">Submit</button>
+        <button type="button" v-on:click="submitFile()">Submit</button>
     </div>
 </html-template>
 
@@ -16,7 +16,7 @@
             action: String,
             activity: String
         },
-        data() {
+        data: function() {
             return {
                 message: '',
                 file: ''

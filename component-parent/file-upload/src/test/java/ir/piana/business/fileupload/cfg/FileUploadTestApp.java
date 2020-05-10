@@ -8,9 +8,9 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication(scanBasePackages = {
         "ir.piana.business",
         "ir.piana.dev.springvue.core"})
-public class ComponentTestApp {
+public class FileUploadTestApp {
     public static void main(String[] args) {
-        SpringApplication.run(ComponentTestApp.class, args);
+        SpringApplication.run(FileUploadTestApp.class, args);
     }
 
     @EventListener(ApplicationReadyEvent.class)
