@@ -35,12 +35,16 @@
         },
         data: function () {
             return {
+                storeState: store.state,
                 itsValue: ''
             }
         },
         methods:{
             keymonitor: function () {
                 this.itsValue = this.$refs.itsElement.value;
+                obj = Object.assign({}, this.storeState.formValue);
+                obj[this.name] = this.itsValue;
+                this.storeState.formValue = obj;
             }
         },
         updated: function () {
