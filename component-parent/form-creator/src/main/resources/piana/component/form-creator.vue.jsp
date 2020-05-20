@@ -1,7 +1,7 @@
 <app name="formCreator"></app>
 
 <html-template>
-<div>
+<div class="container">
     <form>
         <div class="form-group" v-for="control in formModel.controls" v-if="render">
             <template v-if="control.type != uType">
