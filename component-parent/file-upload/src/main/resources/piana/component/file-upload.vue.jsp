@@ -2,16 +2,17 @@
 
 <html-template>
     <div class="row">
-        <div class="col-12 text-center">
-            <img v-if="item.image" :src="item.image" style="margin-bottom: 10px;" v-bind:style="{ width: width, height: height }"/>
-            <img v-if="!item.image" :src="unknownURL" style="margin-bottom: 10px;" v-bind:style="{ width: width, height: height }"/>
+        <div class="col-12 text-center" >
+            <button class="btn btn-success" v-bind:style="{ width: width }"
+                    style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; outline: none; box-shadow: none;"
+                    v-on:click="$refs.file.click();"
+                    type="button" v-on:click="submitFile()">انتخاب</button>
         </div>
-        <div class="col-12 text-center">
-            <button class="btn btn-warning btn-block" v-on:click="$refs.file.click();">فایل</button>
+        <div class="col-12 text-center" >
+            <img v-if="item.image" :src="item.image" style="border: 1px solid #28a745; margin-bottom: 10px;" v-bind:style="{ width: width, height: height }"/>
+            <img v-if="!item.image" :src="unknownURL" style="border: 1px solid #28a745; margin-bottom: 10px;"
+                 v-bind:style="{ width: width, height: height }"/>
             <input type="file" id="file" ref="file" @change="handleFileUpload($event)" style="display: none"/>
-        </div>
-        <div class="col-12 text-center">
-            <button class="btn btn-success btn-block" type="button" v-on:click="submitFile()">Submit</button>
         </div>
     </div>
 </html-template>
