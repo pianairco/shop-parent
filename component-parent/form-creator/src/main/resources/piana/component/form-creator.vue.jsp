@@ -5,7 +5,7 @@
     <form>
         <div class="form-group" v-for="control in formModel.controls" v-if="render">
             <template v-if="control.type != uType">
-                <control-text :label="control.label" :name="control.name" :maskModel="control.maskModel"></control-text>
+                <control-text :label="control.label" :name="control.name" :formName="name" :maskModel="control.maskModel"></control-text>
             </template>
             <template v-if="control.type == uType">
                 <file-upload :action="control.action" :activity="control.activity"></file-upload>
@@ -21,6 +21,12 @@
 <script>
     var $app$ = Vue.component('$app$', {
         template: '$template$',
+        props: {
+          name: {
+              default: 'form1',
+              type: String
+          }
+        },
         data: function () {
             return {
                 storeState: store.state,
@@ -95,6 +101,9 @@
         },
         mounted: function () {
             // console.log("ddddd");
+            obj = Object.assign({}, this.storeState.formValue);
+            obj[this.name] = {};
+            this.storeState.formValue = obj;
             this.x();
         }
     })

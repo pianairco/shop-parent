@@ -14,6 +14,7 @@
         props: {
             label: String,
             name: String,
+            formName: String,
             maskModel: {
                 type: Object,
                 default: function () {
@@ -42,9 +43,9 @@
         methods:{
             keymonitor: function () {
                 this.itsValue = this.$refs.itsElement.value;
-                obj = Object.assign({}, this.storeState.formValue);
+                obj = Object.assign({}, this.storeState.formValue[this.formName]);
                 obj[this.name] = this.itsValue;
-                this.storeState.formValue = obj;
+                this.storeState.formValue[this.formName] = obj;
             }
         },
         updated: function () {
