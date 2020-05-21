@@ -4,15 +4,18 @@
 <div class="container">
     <form>
         <div class="form-group" v-for="control in formModel.controls" v-if="render">
-            <template v-if="control.type != uType">
+            <template v-if="control.type != uType && control.type != iType">
                 <control-text :label="control.label" :name="control.name" :formName="name" :maskModel="control.maskModel"></control-text>
+            </template>
+            <template v-if="control.type == iType">
+                <control-image :label="control.label" :name="control.name" :formName="name" :width="control.width" :height="control.height"></control-image>
             </template>
             <template v-if="control.type == uType">
                 <file-upload :action="control.action" :activity="control.activity"></file-upload>
             </template>
         </div>
         <div>
-            <button type="button" class="btn btn-success" v-on:click="save">save</button>
+            <button type="button" class="btn btn-success btn-block" v-on:click="save">save</button>
         </div>
     </form>
 </div>
@@ -33,7 +36,8 @@
                 cType: 'text',
                 dType: 'date',
                 nType: 'number',
-                uType: 'image-uploader',
+                uType: 'image-upload',
+                iType: 'image',
                 nPattern: '000',
                 message: 'Hello To Box',
                 render: false,
@@ -50,6 +54,8 @@
                                         type: String,
                                         label: String,
                                         name: String,
+                                        width: String,
+                                        height: String,
                                         action: String,
                                         activity: String,
                                         regex: RegExp,
@@ -75,8 +81,11 @@
         },
         methods: {
             save: function() {
+                console.log(this.name)
                 console.log(this.storeState)
-                axios.post('/action', {}, {headers: {"action": "FormSaver", "activity": "save"}})
+                console.log(this.storeState.formValue)
+                console.log(this.storeState.formValue[this.name])
+                axios.post('/action', this.storeState.formValue[this.name], {headers: {"action": "FormSaver", "activity": "save"}})
                     .then((response) => {
                         console.log('save success');
                 }).catch((err) => { this.message = err; });
@@ -146,14 +155,21 @@
                                     .setMaskModel(new MaskModel("Date")
                                             .setMin("1300-01-01").setMax("2040-01-01")),
                             new ControlModel()
-                                    .setType("image-uploader").setLabel("تصویر").setName("profileImage")
+                                    .setType("image").setLabel("تصویر").setName("profileImage")
+                                    .setWidth("200px").setHeight("200px")
                                     .setAction("$bean$").setActivity("y"))
                     ).setAction("FormSaver").setActivity("save"));
                 };
 
-                public Function<HttpServletRequest, ResponseEntity> y = (r) -> {
+                public Function<RequestEntity, ResponseEntity> y = (r) -> {
+                    Object body = r.getBody();
+                    System.out.println(body);
                     return ResponseEntity.ok("success");
                 };
+
+//                public Function<HttpServletRequest, ResponseEntity> y = (r) -> {
+//                    return ResponseEntity.ok("success");
+//                };
             }
         %>
     </action>

@@ -7,6 +7,8 @@ public class ControlModel {
     private String action;
     private String activity;
     private MaskModel maskModel;
+    private String width;
+    private String height;
 
     public ControlModel() {
     }
@@ -62,6 +64,24 @@ public class ControlModel {
 
     public ControlModel setMaskModel(MaskModel maskModel) {
         this.maskModel = maskModel;
+        return this;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    public ControlModel setWidth(String width) {
+        this.width = width;
+        return this;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public ControlModel setHeight(String height) {
+        this.height = height;
         return this;
     }
 }
