@@ -1,11 +1,14 @@
 package ir.piana.business.formcreator.data.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class ControlModel {
     private String type;
     private String label;
     private String name;
     private String action;
     private String activity;
+    @JsonProperty("maskModel")
     private MaskModel maskModel;
     private String width;
     private String height;

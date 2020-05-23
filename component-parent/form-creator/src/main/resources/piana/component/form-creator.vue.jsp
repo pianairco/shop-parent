@@ -14,8 +14,20 @@
                 <file-upload :action="control.action" :activity="control.activity"></file-upload>
             </template>
         </div>
-        <div>
-            <button type="button" class="btn btn-success btn-block" v-on:click="save">save</button>
+        <div class="btn-group" style="width: 100%;" v-if="render">
+            <template v-for="button in formModel.buttons">
+                <button v-if="button.type === bBean"
+                        style="margin-top: 0px;"
+                        type="button" class="btn btn-success btn-block"
+                        v-on:click="saveJava(button.action, button.activity)">{{button.title}}</button>
+                <button v-if="button.type === bJS"
+                        style="margin-top: 0px;"
+                        type="button" class="btn btn-warning btn-block" >{{button.title}}</button>
+                <button v-if="button.type === bReset"
+                        style="margin-top: 0px;"
+                        v-on:click="reset"
+                        type="button" class="btn btn-danger btn-block" >{{button.title}}</button>
+            </template>
         </div>
     </form>
 </div>
@@ -33,6 +45,9 @@
         data: function () {
             return {
                 storeState: store.state,
+                bBean: 'bean',
+                bJS: 'js',
+                bReset: 'reset',
                 cType: 'text',
                 dType: 'date',
                 nType: 'number',
@@ -80,6 +95,29 @@
             }
         },
         methods: {
+            reset: function() {
+                obj = Object.assign({}, this.storeState.formValue[this.name]);
+                console.log(this.name)
+                console.log(obj)
+                this.formModel.controls.forEach((c) => {
+                   if(c.type === this.iType) {
+                    obj[c.name] = null;
+                    console.log("iType");
+                   } else {
+                    obj[c.name] = null;
+                    console.log("oType");
+                   }
+                });
+                console.log(obj)
+                this.storeState.formValue[this.name] = obj;
+            },
+            saveJava: function(action, activity) {
+                axios.post('/action', this.storeState.formValue[this.name], {headers: {"action": action, "activity": activity}})
+                    .then((response) => {
+                    console.log('save success');
+            }).catch((err) => { this.message = err; });
+                console.log("save")
+            },
             save: function() {
                 console.log(this.name)
                 console.log(this.storeState)
@@ -92,7 +130,8 @@
                 console.log("save")
             },
             x: function () {
-                axios.post('/action', {}, {headers: {"action": "$bean$", "activity": "x"}})
+                // axios.post('/action', {}, {headers: {"action": "$bean$", "activity": "x"}})
+                axios.post('/action', {}, {headers: {"action": "FormSaver", "activity": "loadForm"}})
                     .then((response) => {
                         this.formModel = response.data;
                         // console.log(this.controls)

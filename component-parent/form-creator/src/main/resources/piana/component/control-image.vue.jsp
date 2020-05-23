@@ -88,6 +88,18 @@
                 this.createImage(this.file);
             }
         },
+        computed: {
+            val: function() {
+                return store.state.formValue[this.formName][this.name];
+            }
+        },
+        watch: {
+            val: function () {
+                this.item.image = store.state.formValue[this.formName][this.name];
+                if(this.item.image === null)
+                    this.item.image = false;
+            },
+        },
         mounted: function () {
         }
     })

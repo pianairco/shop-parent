@@ -3,7 +3,9 @@ package ir.piana.business.formcreator.data.model;
 import java.util.List;
 
 public class FormModel {
+    private String name;
     private List<ControlModel> controls;
+    private List<ButtonModel> buttons;
     private String action;
     private String activity;
 
@@ -35,5 +37,22 @@ public class FormModel {
     public FormModel setActivity(String activity) {
         this.activity = activity;
         return this;
+    }
+
+    public List<ButtonModel> getButtons() {
+        return buttons;
+    }
+
+    public FormModel setButtons(List<ButtonModel> buttons) {
+        this.buttons = buttons;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

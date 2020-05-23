@@ -30,6 +30,10 @@
             }
         },
         watch: {
+            val: function () {
+                this.itsValue = store.state.formValue[this.formName][this.name]
+                this.$refs.itsElement.value = store.state.formValue[this.formName][this.name]
+            },
             itsValue: function () {
                 // console.log(this.$data.itsValue);
             }
@@ -50,16 +54,24 @@
         },
         updated: function () {
         },
+        computed: {
+            val: function() {
+                return store.state.formValue[this.formName][this.name];
+            }
+        },
         mounted: function () {
             // https://imask.js.org/
             this.$nextTick(function () {
-                console.log(this.maskModel);
                 // console.log(this.maskModel.mask)
+                console.log(this.name)
+                console.log(!this.maskModel.mask)
                 if (!this.maskModel || !this.maskModel.mask) {
-                    console.log("maskModel not exist");
+                    // console.log("maskModel not exist");
                     return;
+                } else {
+                    // console.log("maskModel exist");
+                    // console.log(this.maskModel.mask);
                 }
-                console.log("asda")
 
                 let regex = this.maskModel.mask;
                 if(this.maskModel.mask != 'Date' && this.maskModel.mask != 'Number' && this.maskModel.mask != 'Text') {
