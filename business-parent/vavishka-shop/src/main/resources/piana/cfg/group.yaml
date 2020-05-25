@@ -1,0 +1,29 @@
+groups:
+  amlak:
+    info: c(10) i(fa fa-home) r(0x1) t(املاک)
+    residental_property_sale:
+      info: c(10) i(-) r(0x1) t(فروش مسکونی)
+      new:
+        info: c(10) i(-) r(0x1) t(نوساز) l(/root/products/box)
+      old:
+        info: c(10) i(-) r(0x1) t(قدیمی)
+    residental_property_rent:
+      info: c(11) i(-) r(0x1) t(اجاره مسکونی)
+    commercial_property_sale:
+      info: c(12) i(-) r(0x1) t(فروش تجاری)
+    commercial_property_rent:
+      info: c(13) i(-) r(0x1) t(اجاره تجاری)
+    office_property_sale:
+      info: c(14) i(-) r(0x1) t(فروش اداری)
+    office_property_rent:
+      info: c(15) i(-) r(0x1) t(اجاره اداری)
+    short_term_rent:
+      info: c(16) i(-) r(0x1) t(اجاره کوتاه مدت)
+    real_estate_services:
+      info: c(17) i(-) r(0x1) t(خدمات املاک)
+  automobil:
+    info: c(11) i(fa fa-car) r(0x1) t(ماشین)
+    mashin_rent:
+      info: c(11) i(-) r(0x1) t(اجاره ماشین)
+    mashin_sale:
+        info: c(12) i(-) r(0x1) t(فروش ماشین)

@@ -59,7 +59,6 @@
         <%@ page import="java.util.function.Function" %>
         <%@ page import="java.util.Map" %>
         <%@ page import="ir.piana.dev.springvue.core.action.Action" %>
-        <%@ page import="ir.piana.business.fileupload.data.model.ItemModel" %>
     </import>
     <action>
         <%
@@ -67,11 +66,12 @@
 
                 public Function<RequestEntity, ResponseEntity> x = (r) -> {
                     Map body = (Map) r.getBody();
-                    return ResponseEntity.ok(new ItemModel()
-                            .setId(1).setCode("1").setTitle("خرم بهبهان")
-                            .setImageSrc("/images/logo.png")
-                            .setPrice(10000).setDiscountPercent(40).setPriceUnit("تومان")
-                            .setMeasurement(1).setMeasurementUnit("کیلورم"));
+                    return ResponseEntity.ok("success");
+//                    return ResponseEntity.ok(new ItemModel()
+//                            .setId(1).setCode("1").setTitle("خرم بهبهان")
+//                            .setImageSrc("/images/logo.png")
+//                            .setPrice(10000).setDiscountPercent(40).setPriceUnit("تومان")
+//                            .setMeasurement(1).setMeasurementUnit("کیلورم"));
                 };
             }
         %>

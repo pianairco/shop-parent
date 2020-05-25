@@ -6,7 +6,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ControlTextLoadable /*implements VueComponentLoadable*/ {
+public class ControlTextLoadable implements VueComponentLoadable {
 //    @Override
     public String getComponentString() {
         InputStream inputStream = ControlTextLoadable.class.getResourceAsStream(

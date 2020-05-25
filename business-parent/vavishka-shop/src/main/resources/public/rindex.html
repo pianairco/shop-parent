@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--    <meta name="google-signin-client_id" content="290205995528-o268sq4cttuds0f44jnre5sb6rudfsb5.apps.googleusercontent.com">-->
+    <title>Spring-Vue</title>
+<!--    <link href="style/fontawesome/all.css" rel="stylesheet">-->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/bootstrap-4/bootstrap.min.css">
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="js/vue/vue.js"></script>
+    <script src="js/vue/vue-router.js"></script>
+    <script src="js/bootstrap-4/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/bootstrap-4/popper.min.js"></script>
+    <script src="js/bootstrap-4/bootstrap.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="style/tsidebar.css">
+</head>
+<body>
+
+<div id="app">
+    <router-link to="/home">Go to Home</router-link>
+    <router-link to="/home/prd/foo">Go to Foo</router-link>
+    <router-link to="/home/prd/bar">Go to Bar</router-link>
+
+    <router-view></router-view>
+</div>
+
+<script type="application/javascript">
+    const Home = { template: '<div><div>Home</div><router-view></router-view></div>' };
+    const Foo = { template: '<div>foo</div>' };
+    const Bar = { template: '<div>bar</div>' };
+
+    const routes = [
+        {
+            path: '/home', component: Home, children: [
+                { path: 'prd/foo', component: Foo },
+                { path: 'prd/bar', component: Bar }
+            ]
+        }
+    ];
+
+    const router = new VueRouter({
+        routes // short for `routes: routes`
+    });
+
+    const app = new Vue({
+        router
+    }).$mount('#app');
+</script>
+</body>
+</html>

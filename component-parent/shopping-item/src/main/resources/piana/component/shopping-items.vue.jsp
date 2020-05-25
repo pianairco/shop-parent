@@ -61,7 +61,6 @@
         <%@ page import="java.util.function.Function" %>
         <%@ page import="java.util.Map" %>
         <%@ page import="ir.piana.dev.springvue.core.action.Action" %>
-        <%@ page import="ir.piana.business.fileupload.data.model.ItemModel" %>
         <%@ page import="java.util.Arrays" %>
     </import>
     <action>
@@ -70,7 +69,7 @@
 
                 public Function<RequestEntity, ResponseEntity> shoppingItems = (r) -> {
                     Map body = (Map) r.getBody();
-                    return ResponseEntity.ok(Arrays.asList(
+                    return ResponseEntity.ok("");/*(Arrays.asList(
                             new ItemModel()
                                     .setId(1).setCode("1").setTitle("خرم بهبهان")
                                     .setImageSrc("/images/1.jpg")
@@ -86,7 +85,7 @@
                                     .setImageSrc("/images/3.jpg")
                                     .setPrice(10000).setDiscountPercent(40).setPriceUnit("تومان")
                                     .setMeasurement(1).setMeasurementUnit("کیلورم")
-                    ));
+                    ));*/
                 };
             }
         %>
