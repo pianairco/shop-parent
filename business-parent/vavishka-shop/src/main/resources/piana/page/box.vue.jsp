@@ -31,23 +31,28 @@
 </div>
 </html-template>
 
-<script>
-    var $app$ = Vue.component('$app$', {
-        template: '$template$',
-        data: function () {
-            return {
-                message: 'Hello To Box'
+<vue-script>
+    <script for="component">
+        var $app$ = Vue.component('$app$', {
+            template: '$template$',
+            data: function () {
+                return {
+                    message: 'Hello To Box'
+                }
+            },
+            methods: {
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                        .then((response) => { this.message = response.data; })
+                .catch((err) => { this.message = err; });
+                }
             }
-        },
-        methods: {
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
-                    .then((response) => { this.message = response.data; })
-            .catch((err) => { this.message = err; });
-            }
-        }
-    })
-</script>
+        })
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>
 
 <bean>
     <import>

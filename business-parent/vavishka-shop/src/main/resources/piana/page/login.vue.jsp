@@ -8,7 +8,6 @@
                 <div id="login-column" class="col-12" >
                     <div id="login-box" class="col-md-12">
                         <div id="login-form" class="form pt-5" >
-<!--                            <h3 class="text-center text-info">Login</h3>-->
                             <div class="form-group" v-if="!showLogin">
                                 <button v-on:click="onSignIn()" class="btn btn-danger btn-block btn-md">ورود با حساب گوگل</button>
                             </div>
@@ -18,21 +17,6 @@
                             <div class="form-group">
                                 <img src="">
                             </div>
-<!--                            <div class="form-group">-->
-<!--                                <label for="username" class="text-info">Mobile:</label><br>-->
-<!--                                <input type="text" id="username" v-model="user.mobile" class="form-control">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="password" class="text-info">Password:</label><br>-->
-<!--                                <input type="text" id="password" v-model="user.password" class="form-control">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <button v-on:click="x()" class="btn btn-info btn-md">Login</button>-->
-<!--                            </div>-->
-<!--                            <div id="register-link" class="text-right">-->
-<!--                                <span>{{message}}</span>-->
-<!--                                <button v-on:click="y()" class="btn btn-warning btn-link">Send new Password</button>-->
-<!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -42,27 +26,28 @@
 </div>
 </html-template>
 
-<script>
-    var $app$ = Vue.component('$app$', {
-        template: '$template$',
-        data: function() {
-            return {
-                showLogin: false,
-                user: {
-                    mobile: '',
-                    password: ''
-                },
-                message: '',
-                googleUser: {},
-                googleSignInParams: {
-                    clientId: 'AIzaSyCJLxnzeCwrk_qKbIua-Okoydh4kIf_vGE.apps.googleusercontent.com'
-                },
-                storeState: store.state
-            }
-        },
-        mounted() {
-            this.$nextTick(() => {
-                console.log(gapi);
+<vue-script>
+    <script for="component">
+        var $app$ = Vue.component('$app$', {
+            template: '$template$',
+            data: function() {
+                return {
+                    showLogin: false,
+                    user: {
+                        mobile: '',
+                        password: ''
+                    },
+                    message: '',
+                    googleUser: {},
+                    googleSignInParams: {
+                        clientId: 'AIzaSyCJLxnzeCwrk_qKbIua-Okoydh4kIf_vGE.apps.googleusercontent.com'
+                    },
+                    storeState: store.state
+                }
+            },
+            mounted() {
+                this.$nextTick(() => {
+                    console.log(gapi);
                 gapi.load('auth2', function() {
                     auth2 = gapi.auth2.init({
                         client_id: '290205995528-o268sq4cttuds0f44jnre5sb6rudfsb5.apps.googleusercontent.com',
@@ -72,66 +57,57 @@
                 });
                 console.log(gapi);
             });
-        },
-        methods: {
-            onLogin: function (googleUser) {
-                axios.post('/login', {"username": this.googleUser["username"], "password":"1234"}, {headers: {}})
-                    .then((response) => {
-                        store.addNumber(45);
-                        console.group(response.data);
-                        console.group(response);
-                        console.group(this.storeState.numbers);
-                        console.log(store.getLoggedIn());
-                        store.setLoggedIn(true);
-                        console.log(response.headers.Authorization);
-                        store.setAuthorization(response.headers.Authorization);
-                        console.log(store.getLoggedIn());
-                        console.log(response.headers);
-                        console.log(response["headers"]);
-                        this.message = response.data;
-                    })
-                    .catch((err) => { this.message = err; });
             },
-            onSignIn: function (googleUser) {
-                // store.addNumber(45);
-                auth2.grantOfflineAccess().then(this.signInCallback);
-                // var profile = googleUser.getBasicProfile();
-                // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                // console.log('Name: ' + profile.getName());
-                // console.log('Image URL: ' + profile.getImageUrl());
-                // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-            },
-            signInCallback: function(authResult) {
-                console.log(authResult);
-                // axios.post('/action', authResult, {headers: {"action": "$bean$", "activity": "googleSignIn"}})
-                axios.post('/sample-shop/google-auth', authResult, {headers: {}})
-                    .then((response) => {
+            methods: {
+                onLogin: function (googleUser) {
+                    axios.post('/login', {"username": this.googleUser["username"], "password":"1234"}, {headers: {}})
+                        .then((response) => {
+                    this.storeState.numbers.push(45);
+                    this.storeState.loggedIn = true;
+                    this.storeState.authorization = response.headers.Authorization;
+                    this.message = response.data;
+                })
+                .catch((err) => { this.message = err; });
+                },
+                onSignIn: function (googleUser) {
+                    auth2.grantOfflineAccess().then(this.signInCallback);
+                },
+                signInCallback: function(authResult) {
+                    // axios.post('/action', authResult, {headers: {"action": "$bean$", "activity": "googleSignIn"}})
+                    axios.post('/sample-shop/google-auth', authResult, {headers: {}})
+                        .then((response) => {
                         this.message = response.data;
-                        this.googleUser = response.data;
-                        this.showLogin = true;
-                    })
-                    .catch((err) => { this.message = err; });
-            },
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
-                    .then((response) => {
+                    this.googleUser = response.data;
+                    this.showLogin = true;
+                })
+                .catch((err) => { this.message = err; });
+                },
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                        .then((response) => {
                         this.message = response.data;
-                    })
-                    .catch((err) => { this.message = err; });
-            },
-            y: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "y"}})
-                    .then((response) => {
+                })
+                .catch((err) => { this.message = err; });
+                },
+                y: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "y"}})
+                        .then((response) => {
                         this.message = response.data;
-                        setTimeout(() => {
-                            this.message = '';
-                        }, 1000);
-                    })
-                    .catch((err) => { this.message = err; });
+                    setTimeout(() => {
+                        this.message = '';
+                }, 1000);
+                })
+                .catch((err) => { this.message = err; });
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
+    <script for="state">
+        <state name="loggedIn" value="false" type="boolean" />
+        <state name="numbers" value="[1, 2, 3]" type="array" />
+        <state name="authorization" value="null" type="Object" />
+    </script>
+</vue-script>
 
 <bean>
     <import>

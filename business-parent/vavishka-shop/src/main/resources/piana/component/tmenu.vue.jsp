@@ -32,77 +32,82 @@
     </div>
 </html-template>
 
-<script>
-    Vue.component('$app$', {
-        template: '$template$',
-        props: {
-            color: {
-                type: Object,
-                default: function () {
-                    return {
-                        r: Number,
-                        g: Number,
-                        b: Number
+<vue-script>
+    <script for="component">
+        Vue.component('$app$', {
+            template: '$template$',
+            props: {
+                color: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            r: Number,
+                            g: Number,
+                            b: Number
+                        }
+                    }
+                },
+                mgroups: {
+                    type: Array,
+                    default: function () {
+                        return [{
+                            title: String,
+                            icon: String,
+                            role: String,
+                            code: String,
+                            open: Boolean,
+                            groups: []
+                        }]
+                    }
+                },
+                mActiveParent: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            code: String
+                        }
                     }
                 }
             },
-            mgroups: {
-                type: Array,
-                default: function () {
-                    return [{
-                        title: String,
-                        icon: String,
-                        role: String,
-                        code: String,
-                        open: Boolean,
-                        groups: []
-                    }]
-                }
-            },
-            mActiveParent: {
-                type: Object,
-                default: function () {
-                    return {
-                        code: String
-                    }
-                }
-            }
-        },
-        methods: {
-            changeState: function (event, item){
-                event.preventDefault();
-                if(item.link && item.link != this.$route.path)
-                    router.push(item.link);
-                if(item.groups.length > 0) {
-                    this.mActiveParent.code = item.code;
-                    this.mgroups.forEach((value, index, array) => {
-                        if(value != item)
-                            value.open = false;
+            methods: {
+                changeState: function (event, item){
+                    event.preventDefault();
+                    if(item.link && item.link != this.$route.path)
+                        router.push(item.link);
+                    if(item.groups.length > 0) {
+                        this.mActiveParent.code = item.code;
+                        this.mgroups.forEach((value, index, array) => {
+                            if(value != item)
+                        value.open = false;
                     });
-                    item.open = !item.open;
+                        item.open = !item.open;
+                    }
+                    return false;
+                },
+                getDropDownClass(item) {
+                    return { 'sidebar-dropdown': item.groups.length > 0 }
+                },
+                checkCode: function (item) {
+                    cc = this.mActiveParent.code + '';
+                    do {
+                        if(cc == item.code)
+                            return true;
+                        else
+                            cc = cc.substr(2);
+                    } while (cc.length > 0)
+                    return false;
+                    // console.log(this.mActiveParent.code.length)
+                    // return this.mActiveParent.code == item.code;
+                },
+                reset: function (event) {
+                    this.mActiveParent.code = '';
+                    event.preventDefault();
+                    return false;
                 }
-                return false;
-            },
-            getDropDownClass(item) {
-                return { 'sidebar-dropdown': item.groups.length > 0 }
-            },
-            checkCode: function (item) {
-                cc = this.mActiveParent.code + '';
-                do {
-                    if(cc == item.code)
-                        return true;
-                    else
-                        cc = cc.substr(2);
-                } while (cc.length > 0)
-                return false;
-                // console.log(this.mActiveParent.code.length)
-                // return this.mActiveParent.code == item.code;
-            },
-            reset: function (event) {
-                this.mActiveParent.code = '';
-                event.preventDefault();
-                return false;
             }
-        }
-    });
-</script>
+        });
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>

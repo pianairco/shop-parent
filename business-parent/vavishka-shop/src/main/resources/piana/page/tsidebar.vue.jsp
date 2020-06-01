@@ -91,110 +91,115 @@
     </div>
 </html-template>
 
-<script>
-    var $app$ = Vue.component('$app$', {
-        template: '$template$',
-        props: {
-            menu: {
-                type: Array,
-                default: function () {
-                    return [{
-                        title: String,
-                        route: String,
-                    }]
-                }
-            }
-        },
-        data: function() {
-            return {
-                // groups: [],
-                toggled: false,
-                storeState: store.state
-            }
-        },
-        methods: {
-            changeState: function (item){
-                console.log('ooooooo');
-                console.log(item);
-                console.log(item.open);
-                item.open = !item.open;
-                console.log(item.open);
-                console.log('xxxxxxx');
-            },
-            menuToggle: function (event) {
-                event.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            },
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
-                    .then((response) => { this.message = response.data; })
-                    .catch((err) => { this.message = err; });
-            },
-            showSidebarClick: function () {
-                this.toggled = true;
-            },
-            closeSidebarClick: function () {
-                this.toggled = false;
-            },
-            setMenuEvent: function () {
-                console.log("ddddddddd")
-                $(".sidebar-dropdown > a").click(function() {
-                    $(".sidebar-submenu").hide( );
-                    if (
-                        $(this)
-                            .parent()
-                            .hasClass("active")
-                    ) {
-                        $(".sidebar-dropdown").removeClass("active");
-                        $(this)
-                            .parent()
-                            .removeClass("active");
-                    } else {
-                        $(".sidebar-dropdown").removeClass("active");
-                        $(this)
-                            .next(".sidebar-submenu")
-                            .show();
-                        $(this)
-                            .parent()
-                            .addClass("active");
+<vue-script>
+    <script for="component">
+        var $app$ = Vue.component('$app$', {
+            template: '$template$',
+            props: {
+                menu: {
+                    type: Array,
+                    default: function () {
+                        return [{
+                            title: String,
+                            route: String,
+                        }]
                     }
-                });
-            }
-        },
-        computed: {
-            compiledData () {
-                return {
-                    template: '<div><template v-for="(item, index) in groups" v-if="groups.length > 0">\n' +
-                        '                            <li class="sidebar-dropdown" v-bind:class="{active: item.open}" v-on:click="changeState(item)">\n' +
-                        '                                <a href="#">\n' +
-                        '                                    <i class="fa fa-tachometer-alt"></i>\n' +
-                        '                                    <span>{{item.title}}</span>\n' +
-                        '                                </a>\n' +
-                        '                                <div class="sidebar-submenu">\n' +
-                        '                                    <ul>\n' +
-                        '                                        <li v-for="(itm, idx) in item.groups">\n' +
-                        '                                            <a href="#">{{itm.title}}\n' +
-                        '                                                <span class="badge badge-pill badge-success">Pro</span>\n' +
-                        '                                            </a>\n' +
-                        '                                        </li>\n' +
-                        '                                    </ul>\n' +
-                        '                                </div>\n' +
-                        '                            </li>\n' +
-                        '                        </template></div>'
                 }
+            },
+            data: function() {
+                return {
+                    // groups: [],
+                    toggled: false,
+                    storeState: store.state
+                }
+            },
+            methods: {
+                changeState: function (item){
+                    console.log('ooooooo');
+                    console.log(item);
+                    console.log(item.open);
+                    item.open = !item.open;
+                    console.log(item.open);
+                    console.log('xxxxxxx');
+                },
+                menuToggle: function (event) {
+                    event.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                },
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                        .then((response) => { this.message = response.data; })
+                .catch((err) => { this.message = err; });
+                },
+                showSidebarClick: function () {
+                    this.toggled = true;
+                },
+                closeSidebarClick: function () {
+                    this.toggled = false;
+                },
+                setMenuEvent: function () {
+                    console.log("ddddddddd")
+                    $(".sidebar-dropdown > a").click(function() {
+                        $(".sidebar-submenu").hide( );
+                        if (
+                            $(this)
+                                .parent()
+                                .hasClass("active")
+                        ) {
+                            $(".sidebar-dropdown").removeClass("active");
+                            $(this)
+                                .parent()
+                                .removeClass("active");
+                        } else {
+                            $(".sidebar-dropdown").removeClass("active");
+                            $(this)
+                                .next(".sidebar-submenu")
+                                .show();
+                            $(this)
+                                .parent()
+                                .addClass("active");
+                        }
+                    });
+                }
+            },
+            computed: {
+                compiledData () {
+                    return {
+                        template: '<div><template v-for="(item, index) in groups" v-if="groups.length > 0">\n' +
+                            '                            <li class="sidebar-dropdown" v-bind:class="{active: item.open}" v-on:click="changeState(item)">\n' +
+                            '                                <a href="#">\n' +
+                            '                                    <i class="fa fa-tachometer-alt"></i>\n' +
+                            '                                    <span>{{item.title}}</span>\n' +
+                            '                                </a>\n' +
+                            '                                <div class="sidebar-submenu">\n' +
+                            '                                    <ul>\n' +
+                            '                                        <li v-for="(itm, idx) in item.groups">\n' +
+                            '                                            <a href="#">{{itm.title}}\n' +
+                            '                                                <span class="badge badge-pill badge-success">Pro</span>\n' +
+                            '                                            </a>\n' +
+                            '                                        </li>\n' +
+                            '                                    </ul>\n' +
+                            '                                </div>\n' +
+                            '                            </li>\n' +
+                            '                        </template></div>'
+                    }
+                }
+            },
+            mounted(){
+                // axios.post('/action', {}, {headers: {"action": "groupService", "activity": "groups"}})
+                //     .then((response) => {
+                //         console.log("aaaaa")
+                //
+                //         this.$nextTick(() => {
+                //             this.groups = response.data;
+                //             // this.setMenuEvent();
+                //         });
+                //     })
+                //     .catch((err) => { this.message = err; });
             }
-        },
-        mounted(){
-            // axios.post('/action', {}, {headers: {"action": "groupService", "activity": "groups"}})
-            //     .then((response) => {
-            //         console.log("aaaaa")
-            //
-            //         this.$nextTick(() => {
-            //             this.groups = response.data;
-            //             // this.setMenuEvent();
-            //         });
-            //     })
-            //     .catch((err) => { this.message = err; });
-        }
-    });
-</script>
+        });
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>

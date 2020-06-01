@@ -23,34 +23,41 @@
     </div>
 </html-template>
 
-<script>
-    var $app$ = Vue.component('$app$', {
-        template: '$template$',
-        props: {
-            item: {
-                type: Object,
-                default: function () {
-                    return {
-                        id: Number,
-                        code: String,
-                        imageSrc: String,
-                        title: String,
-                        priceUnit: String,
-                        price: Number,
-                        discountPercent: Number,
-                        measurementUnit: String,
-                        measurement: Number
+<vue-script>
+    <script for="component">
+        var $app$ = Vue.component('$app$', {
+            template: '$template$',
+            props: {
+                item: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            id: Number,
+                            code: String,
+                            imageSrc: String,
+                            title: String,
+                            priceUnit: String,
+                            price: Number,
+                            discountPercent: Number,
+                            measurementUnit: String,
+                            measurement: Number
+                        }
                     }
                 }
+            },
+            data: function () {
+                return {
+                    message: 'Hello To Box'
+                }
             }
-        },
-        data: function () {
-            return {
-                message: 'Hello To Box'
-            }
-        }
-    })
-</script>
+        })
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>
+
+
 
 <bean>
     <import>

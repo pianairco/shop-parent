@@ -10,4 +10,6 @@ route:
       login: login
       products:
         book: book
-        box: shoppingItems
+        box:
+          component: shoppingItems
+          props: {action: 'ss', activity: 'bb'}

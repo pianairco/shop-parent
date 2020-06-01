@@ -12,40 +12,45 @@
 </div>
 </html-template>
 
-<script>
-    Vue.component('$app$', {
-        template: '$template$',
-        data: function() {
-            return {
-                user: {
-                    firstName: '',
-                    lastName: ''
-                },
-                message: 'Hello To Spring Vue'
-            }
-        },
-        mounted() {
-            // this.$nextTick(() => {
-            //     this.$refs.myMap.mapObject.ANY_LEAFLET_MAP_METHOD();
-            // });
-            this.initMap();
-        },
-        methods: {
-            initMap() {
-                var mymap = L.map('mymap').setView([35.679326, 51.4879088], 19);
-                L.marker([35.679326, 51.4879088]).addTo(mymap);
-                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(mymap);
+<vue-script>
+    <script for="component">
+        Vue.component('$app$', {
+            template: '$template$',
+            data: function() {
+                return {
+                    user: {
+                        firstName: '',
+                        lastName: ''
+                    },
+                    message: 'Hello To Spring Vue'
+                }
             },
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
-                    .then((response) => { this.message = response.data; })
-                    .catch((err) => { this.message = err; });
+            mounted() {
+                // this.$nextTick(() => {
+                //     this.$refs.myMap.mapObject.ANY_LEAFLET_MAP_METHOD();
+                // });
+                this.initMap();
+            },
+            methods: {
+                initMap() {
+                    var mymap = L.map('mymap').setView([35.679326, 51.4879088], 19);
+                    L.marker([35.679326, 51.4879088]).addTo(mymap);
+                    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(mymap);
+                },
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                        .then((response) => { this.message = response.data; })
+                .catch((err) => { this.message = err; });
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>
 
 <bean>
     <import>

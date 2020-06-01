@@ -9,11 +9,16 @@
     </div>
 </html-template>
 
-<script>
-    var $app$ = Vue.component('$app$', {
-        template: '$template$',
-        components: {
-            'l-map': window.Vue2Leaflet.LMap,
-        }
-    });
-</script>
+<vue-script>
+    <script for="component">
+        var $app$ = Vue.component('$app$', {
+            template: '$template$',
+            components: {
+                'l-map': window.Vue2Leaflet.LMap,
+            }
+        });
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>

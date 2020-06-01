@@ -16,43 +16,53 @@
 </div>
 </html-template>
 
-<script>
-    var $app$ = Vue.component('$app$', {
-        template: '$template$',
-        data: function () {
-            return {
-                message: 'Hello To Box',
-                render: false,
-                items: {
-                    type: Array,
-                    default: function () {
-                        return [{
-                            id: Number,
-                            code: String,
-                            imageSrc: String,
-                            title: String,
-                            priceUnit: String,
-                            price: Number,
-                            discountPercent: Number,
-                            measurementUnit: String,
-                            measurement: Number
-                        }]
+<vue-script>
+    <script for="component">
+        var $app$ = Vue.component('$app$', {
+            template: '$template$',
+            props: {
+                action: String,
+                activity: String,
+            },
+            data: function () {
+                return {
+                    message: 'Hello To Box',
+                    render: false,
+                    items: {
+                        type: Array,
+                        default: function () {
+                            return [{
+                                id: Number,
+                                code: String,
+                                imageSrc: String,
+                                title: String,
+                                priceUnit: String,
+                                price: Number,
+                                discountPercent: Number,
+                                measurementUnit: String,
+                                measurement: Number
+                            }]
+                        }
                     }
                 }
+            },
+            methods: {
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "shoppingItems"}})
+                        .then((response) => { this.items = response.data; this.render = true; })
+                .catch((err) => { this.message = err; });
+                }
+            },
+            mounted () {
+                this.x();
             }
-        },
-        methods: {
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "shoppingItems"}})
-                    .then((response) => { this.items = response.data; this.render = true; })
-            .catch((err) => { this.message = err; });
-            }
-        },
-        mounted () {
-            this.x();
-        }
-    })
-</script>
+        })
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>
+
 
 <bean>
     <import>
@@ -69,7 +79,7 @@
 
                 public Function<RequestEntity, ResponseEntity> shoppingItems = (r) -> {
                     Map body = (Map) r.getBody();
-                    return ResponseEntity.ok("");/*(Arrays.asList(
+                    return ResponseEntity.ok("ok")/*(Arrays.asList(
                             new ItemModel()
                                     .setId(1).setCode("1").setTitle("خرم بهبهان")
                                     .setImageSrc("/images/1.jpg")
@@ -85,7 +95,7 @@
                                     .setImageSrc("/images/3.jpg")
                                     .setPrice(10000).setDiscountPercent(40).setPriceUnit("تومان")
                                     .setMeasurement(1).setMeasurementUnit("کیلورم")
-                    ));*/
+                    ))*/;
                 };
             }
         %>

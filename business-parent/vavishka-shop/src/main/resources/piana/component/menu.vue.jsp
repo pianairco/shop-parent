@@ -30,26 +30,31 @@
     </nav>
 </html-template>
 
-<script>
-    Vue.component('$app$', {
-        template: '$template$',
-        props: {
-            menu: {
-                type: Array,
-                default: function () {
-                    return [{
-                        title: String,
-                        route: String,
-                    }]
+<vue-script>
+    <script for="component">
+        Vue.component('$app$', {
+            template: '$template$',
+            props: {
+                menu: {
+                    type: Array,
+                    default: function () {
+                        return [{
+                            title: String,
+                            route: String,
+                        }]
+                    }
+                }
+            },
+            methods: {
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                        .then((response) => { this.message = response.data; })
+                .catch((err) => { this.message = err; });
                 }
             }
-        },
-        methods: {
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
-                    .then((response) => { this.message = response.data; })
-                    .catch((err) => { this.message = err; });
-            }
-        }
-    });
-</script>
+        });
+    </script>
+    <script for="state">
+        <state name="formValue" type="object"/>
+    </script>
+</vue-script>
