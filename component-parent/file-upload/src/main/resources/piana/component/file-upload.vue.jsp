@@ -5,7 +5,6 @@
         <div class="col-12 text-center" >
             <button class="btn btn-success" v-bind:style="{ width: width }"
                     style="border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; outline: none; box-shadow: none;"
-                    v-on:click="$refs.file.click();"
                     type="button" v-on:click="submitFile()">انتخاب</button>
         </div>
         <div class="col-12 text-center" >
@@ -88,6 +87,7 @@
         })
     </script>
     <script for="state">
+        <state name="formValue" />
     </script>
 </vue-script>
 

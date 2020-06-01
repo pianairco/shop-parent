@@ -152,5 +152,6 @@
         })
     </script>
     <script for="state">
+        <state name="formValue" />
     </script>
 </vue-script>
