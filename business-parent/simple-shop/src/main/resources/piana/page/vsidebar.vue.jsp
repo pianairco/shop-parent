@@ -34,33 +34,38 @@
     </div>
 </html-template>
 
-<script>
-    var $app$ =Vue.component('$app$', {
-        template: '$template$',
-        props: {
-            menu: {
-                type: Array,
-                default: function () {
-                    return [{
-                        title: String,
-                        route: String,
-                    }]
+<vue-script>
+    <script for="component">
+        var $app$ =Vue.component('$app$', {
+            template: '$template$',
+            props: {
+                menu: {
+                    type: Array,
+                    default: function () {
+                        return [{
+                            title: String,
+                            route: String,
+                        }]
+                    }
                 }
-            }
-        },
-        methods: {
-            menuToggle: function (event) {
-                event.preventDefault();
-                $("#wrapper").toggleClass("toggled");
             },
-            x: function () {
-                axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
-                    .then((response) => { this.message = response.data; })
-                    .catch((err) => { this.message = err; });
+            methods: {
+                menuToggle: function (event) {
+                    event.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                },
+                x: function () {
+                    axios.post('/action', this.user, {headers: {"action": "$bean$", "activity": "x"}})
+                        .then((response) => { this.message = response.data; })
+                .catch((err) => { this.message = err; });
+                }
+            },
+            mounted(){
+                $("#wrapper").toggleClass("toggled");
             }
-        },
-        mounted(){
-            $("#wrapper").toggleClass("toggled");
-        }
-    });
-</script>
+        });
+    </script>
+    <script for="state">
+        <state name="formValue" />
+    </script>
+</vue-script>

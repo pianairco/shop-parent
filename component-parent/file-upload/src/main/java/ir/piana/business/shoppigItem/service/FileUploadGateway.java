@@ -1,4 +1,4 @@
-package ir.piana.business.fileupload.service;
+package ir.piana.business.shoppigItem.service;
 
 import ir.piana.dev.springvue.core.action.Action;
 import org.apache.commons.fileupload.FileItem;
@@ -9,16 +9,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Function;
 
 @Service("FileUploadGateway")
 public class FileUploadGateway extends Action {

@@ -12,4 +12,4 @@ route:
         book: book
         box:
           component: shoppingItems
-          props: {action: 'ss', activity: 'bb'}
+          props: {action: 'ItemsService', activity: 'shoppingItems'}

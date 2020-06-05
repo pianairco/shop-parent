@@ -1,6 +1,0 @@
-route:
-  /: root
-  /login: login
-  /proucts:
-    /book: book
-    /box: box

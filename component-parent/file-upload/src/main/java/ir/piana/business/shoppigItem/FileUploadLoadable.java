@@ -1,9 +1,7 @@
-package ir.piana.business.fileupload;
+package ir.piana.business.shoppigItem;
 
 import ir.piana.dev.springvue.core.action.VueComponentLoadable;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class FileUploadLoadable extends VueComponentLoadable {

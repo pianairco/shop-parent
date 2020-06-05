@@ -1,4 +1,4 @@
-package ir.piana.business.fileupload.cfg;
+package ir.piana.business.shoppigItem.cfg;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

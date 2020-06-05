@@ -3,21 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>shop-parent</artifactId>
+        <artifactId>component-parent</artifactId>
         <groupId>ir.piana.business</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>component-parent</artifactId>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>shopping-item</module>
-        <module>component-tester</module>
-        <module>form-creator</module>
-        <module>file-upload</module>
-        <module>navbar-parent</module>
-    </modules>
+    <artifactId>navbar-parent</artifactId>
 
 </project>

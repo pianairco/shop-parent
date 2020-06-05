@@ -1,4 +1,4 @@
-package ir.piana.business.fileupload.cfg;
+package ir.piana.business.shoppigItem.cfg;
 
 import ir.piana.dev.springvue.core.action.ActionConfig;
 import org.springframework.context.annotation.Configuration;
