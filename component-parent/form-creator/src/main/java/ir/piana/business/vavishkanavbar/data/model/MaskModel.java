@@ -1,4 +1,4 @@
-package ir.piana.business.formcreator.data.model;
+package ir.piana.business.vavishkanavbar.data.model;
 
 public class MaskModel {
     private String mask;

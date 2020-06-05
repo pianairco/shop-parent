@@ -1,9 +1,7 @@
-package ir.piana.business.formcreator;
+package ir.piana.business.vavishkanavbar;
 
 import ir.piana.dev.springvue.core.action.VueComponentLoadable;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class ControlTextLoadable extends VueComponentLoadable {

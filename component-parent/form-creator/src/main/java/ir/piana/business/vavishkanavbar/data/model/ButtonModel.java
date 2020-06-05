@@ -1,6 +1,4 @@
-package ir.piana.business.formcreator.data.model;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+package ir.piana.business.vavishkanavbar.data.model;
 
 public class ButtonModel {
     private String title;

@@ -1,4 +1,4 @@
-package ir.piana.business.formcreator.data.model;
+package ir.piana.business.vavishkanavbar.data.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
