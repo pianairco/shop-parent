@@ -1,0 +1,4 @@
+route:
+  /: $redirect-to(/root)
+  /root: multiLevelMenu
+

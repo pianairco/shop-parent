@@ -1,7 +1,7 @@
 route:
   /: $redirect-to(/root)
   /root:
-    component: tsidebar
+    component: vavishkaNavbar
     children:
       home:
         component: home
